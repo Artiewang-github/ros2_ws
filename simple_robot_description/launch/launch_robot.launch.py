@@ -8,9 +8,10 @@ def generate_launch_description():
     
     # Safely look up package paths
     pkg_share = FindPackageShare(package=package_name).find(package_name)
-    #urdf_path = os.path.join(pkg_share, 'urdf', 'simple_robot.urdf.xacro')
-    urdf_path = os.path.join(pkg_share, 'urdf', 'simple_robot.urdf')
+    urdf_path = os.path.join(pkg_share, 'urdf', 'simple_robot.urdf.xacro')
+    #urdf_path = os.path.join(pkg_share, 'urdf', 'simple_robot.urdf')
     controller_config_path = os.path.join(pkg_share, 'config', 'controllers.yaml')
+    rviz_config_path = os.path.join(pkg_share, 'config', 'simple_robot.rviz')
 
     # Read URDF content
     with open(urdf_path, 'r') as f:
@@ -52,7 +53,8 @@ def generate_launch_description():
         package='rviz2',
         executable='rviz2',
         name='rviz2',
-        output='screen'
+        output='screen',
+        arguments=['-d', rviz_config_path]
     )
 
     return LaunchDescription([
