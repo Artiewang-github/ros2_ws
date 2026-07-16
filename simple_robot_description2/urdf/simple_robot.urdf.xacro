@@ -15,10 +15,10 @@
     
     <link name="base_link">
         <visual>
-            <origin xyz="0 0 0.025" rpy="0 0 0"/>
+            <origin xyz="0 0 0" rpy="0 0 0"/>
             <geometry>
                 <!-- cylinder radius="0.2" length="0.05"/ -->
-                <box size="0.2 0.2 0.1"/>
+                <box size="0.2 0.2 0.2"/>
             </geometry>
             <material name="bright_blue"/>
         </visual>
@@ -28,7 +28,7 @@
         <visual>
             <origin xyz="0 0.3 0" rpy="0 0 0"/>
             <geometry>
-                <box size="0.1 0.5 0.1"/>
+                <box size="0.2 0.6 0.2"/>
             </geometry>
             <material name="bright_red"/>
         </visual>
@@ -36,9 +36,9 @@
 
     <link name="moving_link2">
         <visual>
-            <origin xyz="0 0.8 0" rpy="0 0 0"/>
+            <origin xyz="0 0.3 0" rpy="0 0 0"/>
             <geometry>
-                <box size="0.1 0.5 0.1"/>
+                <box size="0.2 0.6 0.2"/>
             </geometry>
             <material name="bright_green"/>
         </visual>
@@ -47,7 +47,7 @@
     <joint name="joint_1" type="revolute">
         <parent link="base_link"/>
         <child link="moving_link"/>
-        <origin xyz="0 0 0.05" rpy="0 0 0"/>
+        <origin xyz="0 0.1 0" rpy="0 0 0"/>
         <axis xyz="0 0 1"/>
         <limit lower="-3.14" upper="3.14" effort="10.0" velocity="1.0"/>
     </joint>
@@ -55,7 +55,7 @@
     <joint name="joint_2" type="revolute">
         <parent link="moving_link"/>
         <child link="moving_link2"/>
-        <origin xyz="0 0 0.05" rpy="0 0 0"/>
+        <origin xyz="0 0.6 0" rpy="0 0 0"/>
         <axis xyz="0 0 1"/>
         <limit lower="-3.14" upper="3.14" effort="10.0" velocity="1.0"/>
     </joint>
