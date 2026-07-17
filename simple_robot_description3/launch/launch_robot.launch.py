@@ -4,7 +4,7 @@ from launch_ros.actions import Node
 from launch_ros.substitutions import FindPackageShare
 
 def generate_launch_description():
-    package_name = 'simple_robot_description2'
+    package_name = 'simple_robot_description3'
     
     # Safely look up package paths
     pkg_share = FindPackageShare(package=package_name).find(package_name)

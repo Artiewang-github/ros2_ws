@@ -63,7 +63,7 @@
     <joint name="joint_1_z" type="revolute">
         <parent link="moving_dummy_link"/>
         <child link="moving_link"/>
-        <origin xyz="0 0.1 0" rpy="0 0 0"/>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
         <axis xyz="0 0 1"/>
         <limit lower="-3.14" upper="3.14" effort="10.0" velocity="1.0"/>
     </joint>
@@ -79,7 +79,7 @@
     <joint name="joint_2_z" type="revolute">
         <parent link="moving_dummy_link2"/>
         <child link="moving_link2"/>
-        <origin xyz="0 0.6 0" rpy="0 0 0"/>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
         <axis xyz="0 0 1"/>
         <limit lower="-3.14" upper="3.14" effort="10.0" velocity="1.0"/>
     </joint>
