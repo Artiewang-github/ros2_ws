@@ -1,0 +1,138 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="simple_robot">
+
+    <material name="bright_red">
+        <color rgba="1.0 0.0 0.0 1.0"/>
+    </material>
+
+    <material name="bright_green">
+        <color rgba="0.0 1.0 0.0 1.0"/>
+    </material>
+
+    <material name="bright_blue">
+        <color rgba="0.0 0.0 1.0 1.0"/>
+    </material>
+    
+    <link name="base_link">
+        <visual>
+            <origin xyz="0 0 0" rpy="0 0 0"/>
+            <geometry>
+                <!-- cylinder radius="0.2" length="0.05"/ -->
+                <box size="0.2 0.2 0.2"/>
+            </geometry>
+            <material name="bright_blue"/>
+        </visual>
+    </link>
+
+    <!-- a zero size intermediate link -->
+    <link name="moving_dummy_link">
+    </link>
+    
+    <link name="moving_link">
+        <visual>
+            <origin xyz="0 0.3 0" rpy="0 0 0"/>
+            <geometry>
+                <box size="0.2 0.6 0.2"/>
+            </geometry>
+            <material name="bright_red"/>
+        </visual>
+    </link>
+
+    <!-- a zero size intermediate link -->
+    <link name="moving_dummy_link2">
+    </link>
+
+    <link name="moving_link2">
+        <visual>
+            <origin xyz="0 0.3 0" rpy="0 0 0"/>
+            <geometry>
+                <box size="0.2 0.6 0.2"/>
+            </geometry>
+            <material name="bright_green"/>
+        </visual>
+    </link>
+    
+    <joint name="joint_1_x" type="revolute">
+        <parent link="base_link"/>
+        <child link="moving_dummy_link"/>
+        <origin xyz="0 0.1 0" rpy="0 0 0"/>
+        <axis xyz="1 0 0"/>
+        <limit lower="-3.14" upper="3.14" effort="10.0" velocity="1.0"/>
+    </joint>
+
+    <joint name="joint_1_z" type="revolute">
+        <parent link="moving_dummy_link"/>
+        <child link="moving_link"/>
+        <origin xyz="0 0.1 0" rpy="0 0 0"/>
+        <axis xyz="0 0 1"/>
+        <limit lower="-3.14" upper="3.14" effort="10.0" velocity="1.0"/>
+    </joint>
+    
+    <joint name="joint_2_x" type="revolute">
+        <parent link="moving_link"/>
+        <child link="moving_dummy_link2"/>
+        <origin xyz="0 0.6 0" rpy="0 0 0"/>
+        <axis xyz="1 0 0"/>
+        <limit lower="-3.14" upper="3.14" effort="10.0" velocity="1.0"/>
+    </joint>
+
+    <joint name="joint_2_z" type="revolute">
+        <parent link="moving_dummy_link2"/>
+        <child link="moving_link2"/>
+        <origin xyz="0 0.6 0" rpy="0 0 0"/>
+        <axis xyz="0 0 1"/>
+        <limit lower="-3.14" upper="3.14" effort="10.0" velocity="1.0"/>
+    </joint>
+        
+    <ros2_control name="MockHardware" type="system">
+        <hardware>
+            <plugin>mock_components/GenericSystem</plugin>
+            <param name="calculate_dynamics">true</param>
+        </hardware>
+        
+        <joint name="joint_1_x">
+            <command_interface name="position">
+                <param name="min">-3.14</param>
+                <param name="max">3.14</param>
+            </command_interface>
+            <state_interface name="position">
+                <param name="initial_value">0.0</param>
+            </state_interface>
+            <state_interface name="velocity"/>
+        </joint>
+
+        <joint name="joint_1_z">
+            <command_interface name="position">
+                <param name="min">-3.14</param>
+                <param name="max">3.14</param>
+            </command_interface>
+            <state_interface name="position">
+                <param name="initial_value">0.0</param>
+            </state_interface>
+            <state_interface name="velocity"/>
+        </joint>
+        
+        <joint name="joint_2_x">
+            <command_interface name="position">
+                <param name="min">-3.14</param>
+                <param name="max">3.14</param>
+            </command_interface>
+            <state_interface name="position">
+                <param name="initial_value">0.0</param>
+            </state_interface>
+            <state_interface name="velocity"/>
+        </joint>
+
+        <joint name="joint_2_z">
+            <command_interface name="position">
+                <param name="min">-3.14</param>
+                <param name="max">3.14</param>
+            </command_interface>
+            <state_interface name="position">
+                <param name="initial_value">0.0</param>
+            </state_interface>
+            <state_interface name="velocity"/>
+        </joint>
+    </ros2_control>
+
+</robot>
